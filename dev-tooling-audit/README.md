@@ -1,6 +1,13 @@
 # dev-tooling-audit
 
-Inspect a project and recommend developer tooling (LSP servers, AST tools, test runners, type checkers, linters, debuggers, dependency graph tools) that make Claude Code most effective. Produces exact install commands tailored to the detected OS and package manager, plus Claude Code configuration guidance (MCP servers, LSP plugin setup).
+Most coding agents fall back to grep and text parsing because the right developer tools aren't installed. This skill scans your project, detects which languages you use, and tells you exactly what to install — LSP servers, AST tools, test runners, linters — with copy-paste commands for your OS. Run `--verify` to confirm everything works.
+
+## Install
+
+```
+/plugin marketplace add github:Entelligentsia/skillforge
+/plugin install dev-tooling-audit@skillforge
+```
 
 | Skill | Purpose |
 |-------|---------|
