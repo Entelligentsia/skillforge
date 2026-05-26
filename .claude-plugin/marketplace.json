@@ -47,6 +47,11 @@
       "source": "./threejs-skills"
     },
     {
+      "name": "dev-tooling-audit",
+      "description": "Audit a project for developer tooling gaps (LSP, AST, test runners, type checkers, linters, debuggers, dep graph) and recommend exact install steps to make Claude Code most effective",
+      "source": "./dev-tooling-audit"
+    },
+    {
       "name": "forge",
       "description": "Self-enhancing AI software development lifecycle — generates project-specific SDLC instances from meta-definitions",
       "source": {
