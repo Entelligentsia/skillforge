@@ -58,7 +58,7 @@
         "source": "git-subdir",
         "url": "https://github.com/Entelligentsia/forge.git",
         "path": "forge",
-        "ref": "v1.0.3"
+        "ref": "v1.0.10"
       }
     }
   ]
