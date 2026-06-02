@@ -1,0 +1,13 @@
+{
+  "name": "lean-ctx-eval",
+  "version": "1.0.0",
+  "description": "Evaluate whether the lean-ctx MCP saves more context tokens than it costs, using your Claude Code session transcripts. Per-call counterfactual for ctx_read, observational baseline for ctx_shell, net token ledger after instruction+schema overhead.",
+  "license": "MIT",
+  "author": {
+    "name": "Entelligentsia",
+    "email": "hello@entelligentsia.in",
+    "url": "https://github.com/Entelligentsia"
+  },
+  "repository": "https://github.com/Entelligentsia/skillforge",
+  "keywords": ["lean-ctx", "mcp", "context-compression", "token-savings", "eval", "transcripts", "llm-observability"]
+}
