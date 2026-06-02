@@ -1,6 +1,6 @@
 # lean-ctx-eval
 
-A data-grounded eval for the [lean-ctx](https://github.com/lean-ctx) MCP server:
+A data-grounded eval for the [lean-ctx](https://github.com/yvgude/lean-ctx) MCP server:
 **is it actually saving more context tokens than it costs?** Answered from your own
 Claude Code session transcripts — not the vendor's self-reported numbers.
 
