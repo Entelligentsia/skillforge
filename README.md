@@ -17,6 +17,7 @@ Skill packs for Claude Code and other LLM agent systems, published by [Entellige
 | [harness-engineering](./harness-engineering/) | Reference skills | Agent harness components — memory/compaction, caching, sandboxing, permissions, telemetry, hooks, routing (13 skills) |
 | [meta-webxr-skills](./meta-webxr-skills/) | Reference skills | Meta Quest PWA XR engineering (8 skills) |
 | [threejs-skills](./threejs-skills/) | Reference skills | Three.js 3D development (10 skills) |
+| [lean-ctx-eval](./lean-ctx-eval/) | Eval skill | Measure whether the lean-ctx MCP saves more context tokens than it costs, from your own Claude Code session transcripts (1 skill) |
 
 ## Installation (Claude Code)
 
