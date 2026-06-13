@@ -58,12 +58,12 @@
     },
     {
       "name": "forge",
-      "description": "Self-enhancing AI software development lifecycle — generates project-specific SDLC instances from meta-definitions",
+      "description": "[SUNSET — install via the CLI] Self-enhancing AI software development lifecycle. Install with `npm i -g @entelligentsia/forgecli` then `4ge init claude .`. The marketplace plugin is being retired: this version is a migration shim that redirects /forge:init to the CLI-first install (idempotent; preserves your config, store and KB).",
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/Entelligentsia/forge.git",
         "path": "forge",
-        "ref": "v1.4.5"
+        "ref": "v1.5.0"
       }
     }
   ]
