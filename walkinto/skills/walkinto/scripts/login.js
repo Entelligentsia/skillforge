@@ -12,6 +12,10 @@ function openBrowser(url) {
   require('child_process').exec(cmd + ' "' + url + '"');
 }
 
+function confirmUrl(code) {
+  return config.baseUrl + '/agent-auth/confirm?code=' + code;
+}
+
 function pollForToken(code, attempts) {
   if (attempts <= 0) {
     console.error('Login timed out. Please try again.');
@@ -29,6 +33,7 @@ function pollForToken(code, attempts) {
         try {
           var data = JSON.parse(body);
           config.saveToken(data.token);
+          config.deletePendingCode();
           console.log('Login successful!');
           require('./whoami').run();
         } catch (e) {
@@ -45,9 +50,35 @@ function pollForToken(code, attempts) {
   });
 }
 
+// Step 1 — assistant-safe: print the approval link and remember the pending code.
+// No browser launch, no network poll, no token write, so auto-mode won't block it.
+exports.begin = function() {
+  var code = crypto.randomBytes(20).toString('hex');
+  config.savePendingCode(code);
+  console.log('Click this link to sign in to WalkInto, then click Approve:');
+  console.log('');
+  console.log('  ' + confirmUrl(code));
+  console.log('');
+  console.log("Once you've approved in the browser, run: login.js complete");
+};
+
+// Step 2 — exchange the approved code for a token and save it.
+exports.complete = function() {
+  var code = config.getPendingCode();
+  if (!code) {
+    console.error("No pending login. Run 'login.js begin' first.");
+    process.exit(1);
+    return;
+  }
+  console.log('Waiting for approval...');
+  pollForToken(code, 100);
+};
+
+// Default — one-shot interactive flow: open the browser, then poll. Backward compatible.
 exports.run = function() {
   var code = crypto.randomBytes(20).toString('hex');
-  var url = config.baseUrl + '/agent-auth/confirm?code=' + code;
+  config.savePendingCode(code);
+  var url = confirmUrl(code);
   console.log('Opening browser to authorize...');
   console.log(url);
   console.log('');
@@ -56,4 +87,9 @@ exports.run = function() {
   pollForToken(code, 100);
 };
 
-if (require.main === module) exports.run();
+if (require.main === module) {
+  var arg = process.argv[2];
+  if (arg === 'begin') exports.begin();
+  else if (arg === 'complete') exports.complete();
+  else exports.run();
+}
