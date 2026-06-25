@@ -23,25 +23,37 @@ Every multi-option script has `--help` and most have subcommands. **Run `--help`
 
 ## Before any data operation, check authentication
 
+`whoami.js` is a plain authenticated GET — safe to run directly to detect login state:
+
 ```bash
 node --use-system-ca "${CLAUDE_PLUGIN_ROOT}/skills/walkinto/scripts/whoami.js"
 ```
 
-If it prints "Not logged in" or a token error, run **Login**. On success it returns JSON (`userId`, `profile.name`, `profile.email`, `profile.image`, `profile.location`) — parse it and greet the user by name.
+On success it returns JSON (`userId`, `profile.name`, `profile.email`, `profile.image`, `profile.location`) — parse it and greet the user by name. If it prints "Not logged in" or a token/401 error, guide the user through **Login** below.
 
-## Login / Logout
+## Login — the user runs this, not the assistant
 
-```bash
-node --use-system-ca "${CLAUDE_PLUGIN_ROOT}/skills/walkinto/scripts/login.js"
+**Do not invoke `login.js` yourself through the Bash tool.** It opens a browser, long-polls an external server for up to ~5 minutes, and writes a Bearer token to disk. Automatic command approval ("auto mode") blocks that pattern by design — it cannot distinguish a legitimate OAuth sign-in from credential theft. Minting an auth token is also a step the account owner should initiate. So **hand the command to the user to run.**
+
+Ask the user to sign in by running the command themselves. In Claude Code, the cleanest way is to prefix it with `!`, which runs it in this session — so `${CLAUDE_PLUGIN_ROOT}` resolves and the output returns here:
+
+```
+! node --use-system-ca "${CLAUDE_PLUGIN_ROOT}/skills/walkinto/scripts/login.js"
 ```
 
-Opens a browser for Google sign-in. Tell the user to click **Approve**. The script blocks until approval, then prints profile JSON. Confirm with: **Logged in to WalkInto as {name} ({email})**.
+Tell the user: a browser will open for Google sign-in — click **Approve**. The command waits for approval, then prints "Login successful!" and the profile.
 
-```bash
-node --use-system-ca "${CLAUDE_PLUGIN_ROOT}/skills/walkinto/scripts/logout.js"
+> If the user cannot use the `!` prefix and pastes the command into a separate terminal instead, `${CLAUDE_PLUGIN_ROOT}` will NOT be set there — give them the absolute path to `login.js` instead.
+
+Once the user reports success, **run `whoami.js` yourself** to confirm, then say: **Logged in to WalkInto as {name} ({email})**.
+
+## Logout — also user-run
+
+Same reasoning (it revokes the token server-side and deletes the local copy). Present it for the user to run:
+
 ```
-
-Revokes the token server-side, then deletes the local copy.
+! node --use-system-ca "${CLAUDE_PLUGIN_ROOT}/skills/walkinto/scripts/logout.js"
+```
 
 ---
 
