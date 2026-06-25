@@ -17,6 +17,11 @@
       "source": "./freshdesk-api"
     },
     {
+      "name": "walkinto",
+      "description": "WalkInto.in virtual-tour platform and helpdesk — profile, 360 tours, knowledge base, and the support ticket lifecycle; bundles the WalkInto MCP server (13 tools) via a stdio bridge that reuses the plugin login token",
+      "source": "./walkinto"
+    },
+    {
       "name": "doc-review",
       "description": "In-browser annotation overlay for HTML/Markdown/text documents; click Apply in the browser to have Claude Code apply edits to source within ~60s",
       "source": "./doc-review"

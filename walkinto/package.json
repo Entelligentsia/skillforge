@@ -1,0 +1,13 @@
+{
+  "name": "walkinto-plugin",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Build tooling for the WalkInto Claude Code plugin. The shipped runtime artifact is skills/walkinto/scripts/mcp-bridge.bundle.js; node_modules is build-time only.",
+  "scripts": {
+    "build:bridge": "esbuild skills/walkinto/scripts/mcp-bridge.js --bundle --platform=node --target=node20 --format=cjs --minify --external:./config --outfile=skills/walkinto/scripts/mcp-bridge.bundle.js"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/sdk": "1.29.0",
+    "esbuild": "^0.24.0"
+  }
+}
