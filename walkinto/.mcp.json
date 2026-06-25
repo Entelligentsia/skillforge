@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "walkinto": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "--use-system-ca",
+        "${CLAUDE_PLUGIN_ROOT}/skills/walkinto/scripts/mcp-bridge.bundle.js"
+      ]
+    }
+  }
+}

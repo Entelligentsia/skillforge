@@ -1,0 +1,13 @@
+{
+  "name": "walkinto",
+  "version": "1.0.0",
+  "description": "WalkInto.in virtual-tour platform and helpdesk — authenticate, view profile, manage 360 tours, search the knowledge base, and run the support ticket lifecycle. Bundles the WalkInto MCP server (13 tools) via a stdio bridge that reuses the plugin's own login token.",
+  "license": "MIT",
+  "author": {
+    "name": "Entelligentsia",
+    "email": "hello@entelligentsia.in",
+    "url": "https://github.com/Entelligentsia"
+  },
+  "repository": "https://github.com/Entelligentsia/skillforge",
+  "keywords": ["walkinto", "virtual-tours", "360", "helpdesk", "support", "tickets", "knowledge-base", "mcp"]
+}
