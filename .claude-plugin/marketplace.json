@@ -60,6 +60,11 @@
       "name": "lean-ctx-eval",
       "description": "Evaluate whether the lean-ctx MCP saves more context tokens than it costs, using your Claude Code session transcripts — per-call counterfactual for ctx_read, observational baseline for ctx_shell, net token ledger after overhead",
       "source": "./lean-ctx-eval"
+    },
+    {
+      "name": "claude-usage",
+      "description": "Report Claude Code token usage and equivalent Anthropic API cost by model for any date range from local session transcripts — dedup-accurate, cache priced at real per-entry TTL; the only place subscription usage is visible",
+      "source": "./claude-usage"
     }
   ]
 }

@@ -1,0 +1,24 @@
+{
+  "_comment": "Anthropic API list prices, USD per million tokens. Source: platform.claude.com model overview + pricing, verified 2026-07-08. cacheWriteMultiplier/cacheReadMultiplier are applied to the model's input rate (Anthropic's standard prompt-caching structure): 5-min cache write = 1.25x input, 1-hour = 2x input, cache read = 0.1x input. Match is by longest model-id prefix, so dated snapshots (…-20251101) resolve to their family. Local / non-Anthropic models (glm, qwen, gemma, kimi, ollama) are absent on purpose — they cost nothing on the subscription and are reported as unpriced.",
+  "cacheWriteMultiplier": { "5m": 1.25, "1h": 2.0 },
+  "cacheReadMultiplier": 0.1,
+  "models": {
+    "claude-fable-5":   { "input": 10, "output": 50 },
+    "claude-mythos-5":  { "input": 10, "output": 50 },
+    "claude-opus-4-8":  { "input": 5,  "output": 25 },
+    "claude-opus-4-7":  { "input": 5,  "output": 25 },
+    "claude-opus-4-6":  { "input": 5,  "output": 25 },
+    "claude-opus-4-5":  { "input": 5,  "output": 25 },
+    "claude-opus-4-1":  { "input": 15, "output": 75 },
+    "claude-opus-4-0":  { "input": 15, "output": 75 },
+    "claude-opus-4-20250514": { "input": 15, "output": 75 },
+    "claude-sonnet-5":  { "input": 3,  "output": 15, "introInput": 2, "introOutput": 10, "introUntil": "2026-08-31" },
+    "claude-sonnet-4-6": { "input": 3, "output": 15 },
+    "claude-sonnet-4-5": { "input": 3, "output": 15 },
+    "claude-sonnet-4-0": { "input": 3, "output": 15 },
+    "claude-sonnet-4-20250514": { "input": 3, "output": 15 },
+    "claude-haiku-4-5": { "input": 1,  "output": 5 },
+    "claude-3-5-haiku": { "input": 0.8, "output": 4 },
+    "claude-3-haiku":   { "input": 0.25, "output": 1.25 }
+  }
+}
