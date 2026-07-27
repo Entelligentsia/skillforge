@@ -2,6 +2,7 @@
   "name": "harness-engineering",
   "version": "0.1.0",
   "description": "Skills for building agent harness components — memory/compaction, session persistence, prompt caching, subagent orchestration, tool sandboxing, permission gates, streaming, concurrency, telemetry, hooks, workspace state, model routing, rate limiting",
+  "license": "MIT",
   "author": {
     "name": "Entelligentsia",
     "url": "https://github.com/Entelligentsia"

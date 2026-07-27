@@ -2,6 +2,7 @@
   "name": "design-patterns",
   "version": "1.0.0",
   "description": "11 Claude Code skills for software design patterns — GoF creational, structural, and behavioural patterns plus enterprise and DDD tactical patterns (Repository, CQRS, Domain Events, Anti-Corruption Layer)",
+  "license": "MIT",
   "author": {
     "name": "Entelligentsia",
     "url": "https://github.com/Entelligentsia"

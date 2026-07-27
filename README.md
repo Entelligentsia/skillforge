@@ -163,4 +163,11 @@ Multi-session aware: two sessions reviewing the same doc share one server. Apply
 ## Acknowledgements
 
 - `threejs-skills` originally sourced from [pinkforest/threejs-playground](https://github.com/pinkforest/threejs-playground) (MIT)
+- `doc-review` bundles [marked](https://github.com/markedjs/marked) (MIT), © 2011-2024 Christopher Jeffrey
+
+## License
+
+[MIT](LICENSE) © Entelligentsia. Each plugin directory carries its own copy of
+the licence so installed plugins stay self-describing; plugins that bundle or
+derive from third-party code note it at the bottom of their `LICENSE`.
 

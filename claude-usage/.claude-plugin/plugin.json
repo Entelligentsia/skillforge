@@ -2,6 +2,7 @@
   "name": "claude-usage",
   "version": "0.1.0",
   "description": "Report Claude Code token usage and equivalent API-list cost by model for any date range, read from local session transcripts — the only place subscription usage is visible (console.anthropic.com covers pay-as-you-go API keys only)",
+  "license": "MIT",
   "author": {
     "name": "Entelligentsia",
     "url": "https://github.com/Entelligentsia"

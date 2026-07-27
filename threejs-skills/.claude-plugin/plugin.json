@@ -2,6 +2,7 @@
   "name": "threejs-skills",
   "version": "1.0.0",
   "description": "10 Claude Code skills for Three.js 3D development — scene setup, geometry, materials, lighting, textures, animation, loaders, shaders, post-processing, and interaction",
+  "license": "MIT",
   "author": {
     "name": "Entelligentsia",
     "url": "https://github.com/Entelligentsia"
