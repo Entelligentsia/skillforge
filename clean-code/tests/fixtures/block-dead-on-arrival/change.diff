@@ -1,0 +1,14 @@
+diff --git a/src/reports.js b/src/reports.js
+index 6c7d8e9..0f1a2b3 100644
+--- a/src/reports.js
++++ b/src/reports.js
+@@ -8,6 +8,12 @@ function summarise(entries, options) {
+   const total = entries.reduce((sum, e) => sum + e.amount, 0);
+ 
+   return { total, count: entries.length };
++
++  // keep this for the quarterly report
++  if (options.includeAverage) {
++    return { total, count: entries.length, average: total / entries.length };
++  }
+ }

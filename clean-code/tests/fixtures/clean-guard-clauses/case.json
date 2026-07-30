@@ -1,0 +1,5 @@
+{
+  "expect": "pass",
+  "language": "javascript",
+  "rationale": "Pure flattening of nested conditionals into guard clauses; behaviour is identical. functions/error-path-clarity endorses exactly this shape."
+}

@@ -1,0 +1,33 @@
+diff --git a/src/main/java/billing/OrderService.java b/src/main/java/billing/OrderService.java
+index 5e6f7a8..9b0c1d2 100644
+--- a/src/main/java/billing/OrderService.java
++++ b/src/main/java/billing/OrderService.java
+@@ -40,18 +40,6 @@ public class OrderService {
+-    BigDecimal computeLineTotal(Line line, TaxTable table) {
+-        BigDecimal base = line.getUnitPrice().multiply(new BigDecimal(line.getQuantity()));
+-        BigDecimal discount = base.multiply(line.getDiscountRate());
+-        BigDecimal taxable = base.subtract(discount);
+-        BigDecimal tax = taxable.multiply(table.rateFor(line.getRegion()));
+-        return taxable.add(tax).setScale(2, RoundingMode.HALF_UP);
+-    }
+-
+     public Receipt checkout(Order order) {
+         return receiptFactory.build(order);
+     }
+diff --git a/src/main/java/billing/PricingCalculator.java b/src/main/java/billing/PricingCalculator.java
+index 1a2b3c4..3c4d5e6 100644
+--- a/src/main/java/billing/PricingCalculator.java
++++ b/src/main/java/billing/PricingCalculator.java
+@@ -10,4 +10,13 @@ public class PricingCalculator {
+     public BigDecimal subtotal(Order order) {
+         return order.getLines().stream().map(Line::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add);
+     }
++
++    BigDecimal computeLineTotal(Line line, TaxTable table) {
++        BigDecimal base = line.getUnitPrice().multiply(new BigDecimal(line.getQuantity()));
++        BigDecimal discount = base.multiply(line.getDiscountRate());
++        BigDecimal taxable = base.subtract(discount);
++        BigDecimal tax = taxable.multiply(table.rateFor(line.getRegion()));
++        return taxable.add(tax).setScale(2, RoundingMode.HALF_UP);
++    }
+ }

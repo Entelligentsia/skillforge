@@ -1,0 +1,5 @@
+{
+  "expect": "pass",
+  "language": "typescript",
+  "rationale": "functions/argument-count explicitly exempts an options object with many fields. jitter is a config field, not a positional boolean selecting behaviour."
+}

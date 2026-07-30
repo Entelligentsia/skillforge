@@ -1,0 +1,18 @@
+diff --git a/app/validators.py b/app/validators.py
+index 3c4d5e6..7f8a9b0 100644
+--- a/app/validators.py
++++ b/app/validators.py
+@@ -8,3 +8,12 @@ def validate_username(value):
+     if len(value) > 32:
+         raise ValidationError("username must be at most 32 characters")
+     return value.strip()
++
++
++def validate_email(value):
++    if not value:
++        raise ValidationError("email is required")
++    if len(value) > 254:
++        raise ValidationError("email must be at most 254 characters")
++    if "@" not in value:
++        raise ValidationError("email must contain '@'")
++    return value.strip().lower()

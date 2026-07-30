@@ -1,0 +1,26 @@
+diff --git a/internal/hashing/chunks.go b/internal/hashing/chunks.go
+index 2b3c4d5..6e7f8a9 100644
+--- a/internal/hashing/chunks.go
++++ b/internal/hashing/chunks.go
+@@ -1,5 +1,22 @@
+ package hashing
+ 
+ import "hash/crc32"
++
++// ChunkSums returns the CRC32 of each fixed-size chunk of data.
++func ChunkSums(data []byte, size int) []uint32 {
++	if size <= 0 {
++		return nil
++	}
++
++	out := make([]uint32, 0, len(data)/size+1)
++	for i := 0; i < len(data); i += size {
++		end := i + size
++		if end > len(data) {
++			end = len(data)
++		}
++		out = append(out, crc32.ChecksumIEEE(data[i:end]))
++	}
++
++	return out
++}

@@ -1,0 +1,5 @@
+{
+  "expect": "pass",
+  "language": "javascript",
+  "rationale": "errors/never-swallow explicitly permits a documented, deliberate ignore with a stated reason; every other error code is rethrown."
+}

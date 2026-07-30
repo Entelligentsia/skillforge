@@ -1,0 +1,15 @@
+diff --git a/src/main/java/billing/OrderService.java b/src/main/java/billing/OrderService.java
+index 7a8b9c0..1d2e3f4 100644
+--- a/src/main/java/billing/OrderService.java
++++ b/src/main/java/billing/OrderService.java
+@@ -52,6 +52,12 @@ public class OrderService {
+     public Receipt checkout(Order order) {
++        try {
++            inventory.reserve(order.getId(), order.getItems());
++        } catch (InventoryException e) {
++            log.debug("reserve failed");
++        }
++
+         return receiptFactory.build(order);
+     }
+ }

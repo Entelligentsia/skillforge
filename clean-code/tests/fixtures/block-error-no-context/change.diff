@@ -1,0 +1,18 @@
+diff --git a/internal/config/config.go b/internal/config/config.go
+index 7d8e9f0..1b2c3d4 100644
+--- a/internal/config/config.go
++++ b/internal/config/config.go
+@@ -24,7 +24,11 @@ func Load(path string) (*Config, error) {
+ 	body, err := os.ReadFile(path)
+ 	if err != nil {
+ 		return nil, fmt.Errorf("reading config %s: %w", path, err)
+ 	}
+ 
+ 	var cfg Config
+-	return &cfg, json.Unmarshal(body, &cfg)
++	if err := json.Unmarshal(body, &cfg); err != nil {
++		return nil, errors.New("invalid input")
++	}
++
++	return &cfg, nil
+ }

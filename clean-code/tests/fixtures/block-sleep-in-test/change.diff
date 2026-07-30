@@ -1,0 +1,13 @@
+diff --git a/tests/test_worker.py b/tests/test_worker.py
+index 5b6c7d8..9e0f1a2 100644
+--- a/tests/test_worker.py
++++ b/tests/test_worker.py
+@@ -12,3 +12,11 @@ import time
++
++
++def test_worker_processes_job(queue, store):
++    job = queue.enqueue(Job(payload={"id": 7}))
++
++    time.sleep(2)
++
++    assert store.get(job.id).status == "done"

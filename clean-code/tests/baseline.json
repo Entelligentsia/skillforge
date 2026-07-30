@@ -1,0 +1,208 @@
+{
+  "meta": {
+    "reviewer": "claude -p",
+    "cli": "2.1.220 (Claude Code)",
+    "recordedAt": "2026-07-30T13:08:24.402Z"
+  },
+  "summary": {
+    "fixtures": 14,
+    "cleanFixtures": 6,
+    "blockingFixtures": 8,
+    "falsePositiveRate": 0,
+    "detectionRate": 1,
+    "exactSlugAgreement": 0.875,
+    "unexpectedFindings": 1,
+    "errors": 0,
+    "thresholds": {
+      "maxFpRate": 0.1,
+      "minDetection": 0.8
+    },
+    "pass": true
+  },
+  "results": [
+    {
+      "name": "block-and-function",
+      "expect": "block",
+      "principle": "functions/single-responsibility",
+      "language": "python",
+      "correct": 1,
+      "runs": 1,
+      "stability": 1,
+      "outcome": "correct",
+      "exactSlugRate": 1,
+      "unexpected": [
+        "app/users.py:25 [errors/context-in-message] ValidationError messages \"bad email\" and \"password too short\" carry no diagnostic context"
+      ],
+      "error": null
+    },
+    {
+      "name": "block-boolean-param",
+      "expect": "block",
+      "principle": "functions/argument-count",
+      "language": "typescript",
+      "correct": 1,
+      "runs": 1,
+      "stability": 1,
+      "outcome": "correct",
+      "exactSlugRate": 1,
+      "unexpected": [],
+      "error": null
+    },
+    {
+      "name": "block-dead-on-arrival",
+      "expect": "block",
+      "principle": "functions/dead-on-arrival",
+      "language": "javascript",
+      "correct": 1,
+      "runs": 1,
+      "stability": 1,
+      "outcome": "correct",
+      "exactSlugRate": 1,
+      "unexpected": [],
+      "error": null
+    },
+    {
+      "name": "block-error-no-context",
+      "expect": "block",
+      "principle": "errors/context-in-message",
+      "language": "go",
+      "correct": 1,
+      "runs": 1,
+      "stability": 1,
+      "outcome": "correct",
+      "exactSlugRate": 1,
+      "unexpected": [],
+      "error": null
+    },
+    {
+      "name": "block-lying-name",
+      "expect": "block",
+      "principle": "naming/no-disinformation",
+      "language": "go",
+      "correct": 1,
+      "runs": 1,
+      "stability": 1,
+      "outcome": "correct",
+      "exactSlugRate": 0,
+      "unexpected": [],
+      "error": null
+    },
+    {
+      "name": "block-mock-coupled-test",
+      "expect": "block",
+      "principle": "tests/asserts-behavior-not-implementation",
+      "language": "javascript",
+      "correct": 1,
+      "runs": 1,
+      "stability": 1,
+      "outcome": "correct",
+      "exactSlugRate": 1,
+      "unexpected": [],
+      "error": null
+    },
+    {
+      "name": "block-sleep-in-test",
+      "expect": "block",
+      "principle": "tests/no-sleep",
+      "language": "python",
+      "correct": 1,
+      "runs": 1,
+      "stability": 1,
+      "outcome": "correct",
+      "exactSlugRate": 1,
+      "unexpected": [],
+      "error": null
+    },
+    {
+      "name": "block-swallowed-exception",
+      "expect": "block",
+      "principle": "errors/never-swallow",
+      "language": "java",
+      "correct": 1,
+      "runs": 1,
+      "stability": 1,
+      "outcome": "correct",
+      "exactSlugRate": 1,
+      "unexpected": [],
+      "error": null
+    },
+    {
+      "name": "clean-deliberate-ignore",
+      "expect": "pass",
+      "principle": null,
+      "language": "javascript",
+      "correct": 1,
+      "runs": 1,
+      "stability": 1,
+      "outcome": "correct",
+      "exactSlugRate": null,
+      "unexpected": [],
+      "error": null
+    },
+    {
+      "name": "clean-guard-clauses",
+      "expect": "pass",
+      "principle": null,
+      "language": "javascript",
+      "correct": 1,
+      "runs": 1,
+      "stability": 1,
+      "outcome": "correct",
+      "exactSlugRate": null,
+      "unexpected": [],
+      "error": null
+    },
+    {
+      "name": "clean-moved-code",
+      "expect": "pass",
+      "principle": null,
+      "language": "java",
+      "correct": 1,
+      "runs": 1,
+      "stability": 1,
+      "outcome": "correct",
+      "exactSlugRate": null,
+      "unexpected": [],
+      "error": null
+    },
+    {
+      "name": "clean-options-object",
+      "expect": "pass",
+      "principle": null,
+      "language": "typescript",
+      "correct": 1,
+      "runs": 1,
+      "stability": 1,
+      "outcome": "correct",
+      "exactSlugRate": null,
+      "unexpected": [],
+      "error": null
+    },
+    {
+      "name": "clean-short-names",
+      "expect": "pass",
+      "principle": null,
+      "language": "go",
+      "correct": 1,
+      "runs": 1,
+      "stability": 1,
+      "outcome": "correct",
+      "exactSlugRate": null,
+      "unexpected": [],
+      "error": null
+    },
+    {
+      "name": "clean-two-duplications",
+      "expect": "pass",
+      "principle": null,
+      "language": "python",
+      "correct": 1,
+      "runs": 1,
+      "stability": 1,
+      "outcome": "correct",
+      "exactSlugRate": null,
+      "unexpected": [],
+      "error": null
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+diff --git a/internal/auth/session.go b/internal/auth/session.go
+index 3f4a5b6..7c8d9e0 100644
+--- a/internal/auth/session.go
++++ b/internal/auth/session.go
+@@ -18,3 +18,18 @@ import (
++
++// GetSession returns the session for the given token.
++func GetSession(ctx context.Context, token string) (*Session, error) {
++	s, err := store.Lookup(ctx, token)
++	if err == nil {
++		return s, nil
++	}
++
++	s = &Session{Token: token, CreatedAt: time.Now()}
++	if err := store.Save(ctx, s); err != nil {
++		return nil, fmt.Errorf("saving new session for token %q: %w", token, err)
++	}
++
++	return s, nil
++}

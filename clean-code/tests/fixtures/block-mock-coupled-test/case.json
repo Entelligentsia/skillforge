@@ -1,0 +1,7 @@
+{
+  "expect": "block",
+  "expect_principle": "tests/asserts-behavior-not-implementation",
+  "expect_file": "profile.test.js",
+  "language": "javascript",
+  "rationale": "Asserts only that the repository was called; nothing checks the profile was actually updated. Passes even if save() writes the wrong data."
+}

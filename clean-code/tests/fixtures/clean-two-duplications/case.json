@@ -1,0 +1,5 @@
+{
+  "expect": "pass",
+  "language": "python",
+  "rationale": "Second occurrence of a validation shape, not a third. functions/duplication-with-divergence-risk fires on the third instance or on rules that must stay in sync; these two encode independent field rules."
+}

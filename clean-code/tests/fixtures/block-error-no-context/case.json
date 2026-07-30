@@ -1,0 +1,7 @@
+{
+  "expect": "block",
+  "expect_principle": "errors/context-in-message",
+  "expect_file": "config.go",
+  "language": "go",
+  "rationale": "The parse error is replaced by 'invalid input': the cause is dropped and nothing identifies which file or field failed."
+}

@@ -1,0 +1,7 @@
+{
+  "expect": "block",
+  "expect_principle": "tests/no-sleep",
+  "expect_file": "test_worker.py",
+  "language": "python",
+  "rationale": "Fixed two-second sleep to wait for async work: flaky on a loaded machine, slow everywhere else."
+}

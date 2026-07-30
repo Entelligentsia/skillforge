@@ -1,0 +1,7 @@
+{
+  "expect": "block",
+  "expect_principle": "functions/single-responsibility",
+  "expect_file": "users.py",
+  "language": "python",
+  "rationale": "Validation, persistence and mail dispatch in one function; the name already admits the split."
+}

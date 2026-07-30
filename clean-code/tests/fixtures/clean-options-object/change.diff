@@ -1,0 +1,33 @@
+diff --git a/src/retry.ts b/src/retry.ts
+index 6f7a8b9..0c1d2e3 100644
+--- a/src/retry.ts
++++ b/src/retry.ts
+@@ -1,3 +1,29 @@
++export interface RetryOptions {
++  attempts: number;
++  initialDelayMs: number;
++  maxDelayMs: number;
++  jitter: boolean;
++  retryOn: (error: unknown) => boolean;
++}
++
++export async function withRetry<T>(operation: () => Promise<T>, options: RetryOptions): Promise<T> {
++  let delay = options.initialDelayMs;
++  let lastError: unknown;
++
++  for (let attempt = 0; attempt < options.attempts; attempt += 1) {
++    try {
++      return await operation();
++    } catch (error) {
++      if (!options.retryOn(error)) throw error;
++      lastError = error;
++      await sleep(options.jitter ? withJitter(delay) : delay);
++      delay = Math.min(delay * 2, options.maxDelayMs);
++    }
++  }
++
++  throw new RetriesExhaustedError(
++    `operation failed after ${options.attempts} attempts`,
++    { cause: lastError },
++  );
++}

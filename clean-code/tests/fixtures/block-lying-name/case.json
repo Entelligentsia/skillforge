@@ -1,0 +1,9 @@
+{
+  "expect": "block",
+  "expect_principle": "naming/no-disinformation",
+  "also_accepts": ["functions/no-hidden-side-effects"],
+  "allow_extra": ["errors/never-swallow"],
+  "expect_file": "session.go",
+  "language": "go",
+  "rationale": "GetSession creates and persists a session on miss. Callers reasonably assume a Get is free and repeatable. The corpus covers this from two directions — the name is untrue, and a query-named function mutates — so either citation is a correct catch. Treating every non-nil error as 'not found' is a second, real defect a reviewer may also raise."
+}

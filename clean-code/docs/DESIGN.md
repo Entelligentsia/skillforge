@@ -22,6 +22,7 @@ there is nothing to decide.
 | B10 | Principles corpus | `docs/principles/*.md` | Single source of truth shared by B4 and B9 |
 | B11 | Project config | `.claude/clean-code.local.md` in target repo | Repo opt-in sentinel + thresholds, excludes, fail mode |
 | B12 | Remove command | `commands/remove.md` (`/clean-code:remove`) | Exact, per-manager teardown of everything setup created |
+| B20 | Calibration harness | `tests/calibrate.js` + `tests/fixtures/` | Makes the reviewer's calibration falsifiable — the prerequisite for growing B10 |
 
 ## 2. Directory layout
 
@@ -275,7 +276,13 @@ Body: free-text project-specific review guidance, appended to B4's prompt.
 ## 14. Build order
 
 **Status:** steps 1–5 implemented (v0.1.0). B1–B12 are built and covered by
-`tests/gate.test.sh` (80 assertions, no model in the loop). From the enterprise
+`tests/gate.test.sh` (91 assertions, no model in the loop). B20, the calibration
+harness, is built and self-tested (`tests/calibrate.test.sh`, 37 assertions) —
+see `docs/CALIBRATION.md`. It gates corpus growth: the Tier-0 and Tier-1 rule
+areas identified as missing (concurrency and shared state, mutation and
+aliasing, dependency direction, resource and scale discipline, contract
+compatibility, correctness traps, trust-boundary hygiene, observability,
+configuration) should each land with fixtures in both directions. From the enterprise
 layer, the policy resolver (B13) and its lock/strictest-wins merge are
 implemented in `gate.js` because config resolution had to be correct from the
 start; commit trailers (B15) are specified in `commands/review.md`; a

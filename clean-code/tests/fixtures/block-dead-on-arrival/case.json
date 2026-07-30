@@ -1,0 +1,7 @@
+{
+  "expect": "block",
+  "expect_principle": "functions/dead-on-arrival",
+  "expect_file": "reports.js",
+  "language": "javascript",
+  "rationale": "The added branch sits after an unconditional return and can never execute."
+}

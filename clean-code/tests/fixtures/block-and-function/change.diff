@@ -1,0 +1,19 @@
+diff --git a/app/users.py b/app/users.py
+index 2e3f4a5..6b7c8d9 100644
+--- a/app/users.py
++++ b/app/users.py
+@@ -20,3 +20,16 @@ from .errors import ValidationError
++
++
++def validate_and_save_user(payload, db, mailer):
++    if "@" not in payload["email"]:
++        raise ValidationError("bad email")
++    if len(payload["password"]) < 12:
++        raise ValidationError("password too short")
++
++    user_id = db.insert("users", payload)
++
++    mailer.send_welcome(payload["email"], user_id)
++    audit.record("user.created", user_id)
++
++    return user_id

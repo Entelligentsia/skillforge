@@ -1,0 +1,7 @@
+{
+  "expect": "block",
+  "expect_principle": "functions/argument-count",
+  "expect_file": "invoice.ts",
+  "language": "typescript",
+  "rationale": "Two positional booleans select behaviour; renderInvoice(inv, true, false) is unreadable at the call site."
+}

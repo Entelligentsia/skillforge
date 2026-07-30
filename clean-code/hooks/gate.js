@@ -581,10 +581,22 @@ function isGating(finding, threshold) {
 }
 
 // Assemble the full reviewer prompt: agent instructions, layered rubric, diff.
-// Shared by the git-native hook and any CI runner, so both judge identically.
-function cmdPrompt() {
+// Shared by the git-native hook, any CI runner, and the calibration harness, so
+// all three judge identically.
+//
+// --diff-file <path> reviews a diff from disk instead of the staged tree and
+// uses the base corpus alone (no repo policy, no personal rubric). Calibration
+// depends on that: a fixture must score the same in every checkout.
+function cmdPrompt(argv = []) {
   const pluginRoot = path.join(__dirname, '..');
-  const resolved = resolveConfig();
+  const flagIndex = argv.indexOf('--diff-file');
+  const diffFile = flagIndex >= 0 ? argv[flagIndex + 1] : null;
+  if (flagIndex >= 0 && !diffFile) {
+    console.error('clean-code: --diff-file requires a path');
+    process.exit(2);
+  }
+
+  const resolved = diffFile ? { rubric: [], config: DEFAULTS } : resolveConfig();
   const sections = [];
 
   const agentFile = path.join(pluginRoot, 'agents', 'clean-code-reviewer.md');
@@ -607,8 +619,12 @@ function cmdPrompt() {
     sections.push(`# Rubric — source: ${layer.source}\n\n${layer.text}`);
   }
 
-  const args = ['diff', '--staged', '--no-color', '--', '.', ...excludePathspecs(resolved.config)];
-  sections.push(`# Staged diff (repo root: ${repoRoot()})\n\n\`\`\`diff\n${git(args)}\n\`\`\``);
+  if (diffFile) {
+    sections.push(`# Diff under review\n\n\`\`\`diff\n${fs.readFileSync(diffFile, 'utf8').trim()}\n\`\`\``);
+  } else {
+    const args = ['diff', '--staged', '--no-color', '--', '.', ...excludePathspecs(resolved.config)];
+    sections.push(`# Staged diff (repo root: ${repoRoot()})\n\n\`\`\`diff\n${git(args)}\n\`\`\``);
+  }
   sections.push('Return only the JSON object described above. No prose, no code fences.');
 
   process.stdout.write(sections.join('\n\n---\n\n') + '\n');
@@ -692,7 +708,7 @@ function main() {
     case 'diff':
       return cmdDiff();
     case 'prompt':
-      return cmdPrompt();
+      return cmdPrompt(rest);
     case 'triage':
       return cmdTriage();
     case 'status':

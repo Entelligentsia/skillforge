@@ -1,0 +1,22 @@
+diff --git a/src/checkout.js b/src/checkout.js
+index 1a2b3c4..5d6e7f8 100644
+--- a/src/checkout.js
++++ b/src/checkout.js
+@@ -12,15 +12,14 @@ const { ValidationError } = require('./errors');
+ function applyDiscount(order, coupon) {
+-  if (coupon) {
+-    if (coupon.expiresAt > Date.now()) {
+-      if (!coupon.used) {
+-        return order.total * (1 - coupon.rate);
+-      }
+-    }
+-  }
+-  return order.total;
++  if (!coupon) return order.total;
++  if (coupon.expiresAt <= Date.now()) return order.total;
++  if (coupon.used) return order.total;
++
++  return order.total * (1 - coupon.rate);
+ }
+ 
+ module.exports = { applyDiscount };

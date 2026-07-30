@@ -1,0 +1,7 @@
+{
+  "expect": "block",
+  "expect_principle": "errors/never-swallow",
+  "expect_file": "OrderService.java",
+  "language": "java",
+  "rationale": "Reservation failure is debug-logged and execution continues, so the order proceeds as if stock were held."
+}

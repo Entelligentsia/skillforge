@@ -1,0 +1,5 @@
+{
+  "expect": "pass",
+  "language": "java",
+  "rationale": "The method body is moved between classes byte-for-byte. Its pre-existing flaws are out of scope: review the change, not the file."
+}

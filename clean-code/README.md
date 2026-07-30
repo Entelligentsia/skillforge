@@ -133,18 +133,30 @@ identical; what changes is who decides the rules.
 | [`docs/DESIGN.md`](docs/DESIGN.md) | Component design, state model, edge-case matrix |
 | [`docs/LIFECYCLE.md`](docs/LIFECYCLE.md) | Exact install / configure / remove specification |
 | [`docs/ENTERPRISE.md`](docs/ENTERPRISE.md) | Rulesets, governance, CI enforcement |
+| [`docs/CALIBRATION.md`](docs/CALIBRATION.md) | Measuring the reviewer; how to add fixtures and change the corpus safely |
 | [`docs/principles/`](docs/principles/) | The rubric itself |
 
 ## Tests
 
 ```
-bash tests/gate.test.sh
+bash tests/gate.test.sh        # 91 assertions — the deterministic core
+bash tests/calibrate.test.sh   # 37 assertions — the calibration harness itself
+node tests/calibrate.js        # score the reviewer against the fixture set
 ```
 
-80 assertions covering the deterministic core with no model in the loop: commit
-detection, review identity, marker lifecycle, opt-in and pause, bypass logging,
-config resolution and policy locks, severity thresholds, and the git-hook path
-end to end against a stub CLI.
+`gate.test.sh` covers commit detection, review identity, marker lifecycle,
+opt-in and pause, bypass logging, config resolution and policy locks, severity
+thresholds, worktree path handling, and the git-hook path end to end against a
+stub CLI — no model in the loop.
+
+`calibrate.js` measures the thing tests cannot: whether the reviewer's
+calibration actually holds. It scores 14 fixtures — six clean ones written to be
+*tempting*, eight with a seeded defect — and reports false-positive rate,
+detection rate, and stability. False positives are the number that matters,
+since they are what get a gate bypassed reflexively. See
+[`docs/CALIBRATION.md`](docs/CALIBRATION.md) before adding rules to the corpus:
+a rule shipped without fixtures in both directions is a rule with no measured
+cost.
 
 ## Licence
 

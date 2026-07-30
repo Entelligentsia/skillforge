@@ -1,0 +1,23 @@
+diff --git a/src/invoice.ts b/src/invoice.ts
+index 4a5b6c7..8d9e0f1 100644
+--- a/src/invoice.ts
++++ b/src/invoice.ts
+@@ -30,8 +30,18 @@ import { Invoice } from './types';
+-export function renderInvoice(invoice: Invoice): string {
+-  return template(invoice);
++export function renderInvoice(invoice: Invoice, isDraft: boolean, includeTax: boolean): string {
++  let body = template(invoice);
++
++  if (isDraft) {
++    body = watermark(body, 'DRAFT');
++  }
++
++  if (includeTax) {
++    body = appendTaxSummary(body, invoice.taxLines);
++  }
++
++  return body;
+ }
+ 
+-const html = renderInvoice(invoice);
++const html = renderInvoice(invoice, true, false);

@@ -1,0 +1,5 @@
+{
+  "expect": "pass",
+  "language": "go",
+  "rationale": "Short scope-local names (i, out, end) are clarity at this scope per naming/scope-proportional-length, and the zero-size guard closes the only real edge case."
+}

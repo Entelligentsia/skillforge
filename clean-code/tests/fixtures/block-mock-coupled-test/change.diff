@@ -1,0 +1,18 @@
+diff --git a/tests/profile.test.js b/tests/profile.test.js
+index 8e9f0a1..2c3d4e5 100644
+--- a/tests/profile.test.js
++++ b/tests/profile.test.js
+@@ -14,3 +14,15 @@ const { updateProfile } = require('../src/profile');
++
++  it('updates the profile', async () => {
++    const repo = {
++      load: jest.fn().mockResolvedValue({ id: 1, name: 'Grace' }),
++      save: jest.fn(),
++    };
++
++    await updateProfile(repo, { id: 1, name: 'Ada' });
++
++    expect(repo.load).toHaveBeenCalledTimes(1);
++    expect(repo.save).toHaveBeenCalledTimes(1);
++  });
++});

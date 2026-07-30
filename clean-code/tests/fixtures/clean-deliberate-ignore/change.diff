@@ -1,0 +1,18 @@
+diff --git a/src/cache.js b/src/cache.js
+index 4d5e6f7..8a9b0c1 100644
+--- a/src/cache.js
++++ b/src/cache.js
+@@ -14,6 +14,16 @@ async function loadManifest(cachePath) {
+-  const raw = await fs.readFile(cachePath, 'utf8');
+-  return JSON.parse(raw);
++  let raw;
++  try {
++    raw = await fs.readFile(cachePath, 'utf8');
++  } catch (err) {
++    // First run: the cache file does not exist yet, so fall through to a cold load.
++    if (err.code !== 'ENOENT') throw err;
++    return null;
++  }
++
++  return JSON.parse(raw);
+ }
