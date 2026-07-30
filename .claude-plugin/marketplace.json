@@ -52,6 +52,11 @@
       "source": "./threejs-skills"
     },
     {
+      "name": "clean-code",
+      "description": "Commit-time clean-code review gate — blocks unreviewed commits, reviews the staged diff against a layered rubric, and resolves findings through a single apply/manual/approve decision; silent when there is nothing to report",
+      "source": "./clean-code"
+    },
+    {
       "name": "dev-tooling-audit",
       "description": "Audit a project for developer tooling gaps (LSP, AST, test runners, type checkers, linters, debuggers, dep graph) and recommend exact install steps to make Claude Code most effective",
       "source": "./dev-tooling-audit"
@@ -65,6 +70,11 @@
       "name": "claude-usage",
       "description": "Report Claude Code token usage and equivalent Anthropic API cost by model for any date range from local session transcripts — dedup-accurate, cache priced at real per-entry TTL; the only place subscription usage is visible",
       "source": "./claude-usage"
+    },
+    {
+      "name": "forge-usage",
+      "description": "Report forge-cli orchestrator run token usage and cost by model / project / sprint / phase for any date range, read from the central transcript archive (~/.pi/forge-cli/transcripts/) — the only place forge run usage is visible; uses the authoritative per-phase cost forge recorded at run time",
+      "source": "./forge-usage"
     }
   ]
 }

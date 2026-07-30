@@ -1,0 +1,67 @@
+# clean-code — CI companion (report-only by default)
+#
+# Local git hooks are convenience enforcement: anyone can pass --no-verify.
+# Re-running the same review server-side is the only real guarantee, so this
+# job recomputes it over the PR diff using the repo's own pinned config.
+#
+# Copy into .github/workflows/clean-code.yml and set ANTHROPIC_API_KEY.
+
+name: clean-code review
+
+on:
+  pull_request:
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Claude Code
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Check out the plugin
+        uses: actions/checkout@v4
+        with:
+          repository: Entelligentsia/skillforge
+          path: .clean-code-plugin
+
+      - name: Stage the PR diff
+        # The gate reviews staged content, so reproduce the PR as an index state.
+        run: |
+          git reset --soft "${{ github.event.pull_request.base.sha }}"
+
+      - name: Run review
+        id: review
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          GATE=.clean-code-plugin/clean-code/hooks/gate.js
+          node "$GATE" prompt > /tmp/prompt.txt
+          claude -p < /tmp/prompt.txt > /tmp/review.json || exit 0
+          node "$GATE" triage < /tmp/review.json > /tmp/triage.txt 2>&1
+          echo "exit=$?" >> "$GITHUB_OUTPUT"
+          cat /tmp/triage.txt
+
+      # Report-only: comment the findings, never fail the build. Flip to a
+      # failing step once teams have adopted locally — see docs/ENTERPRISE.md
+      # for the ratchet and the CODEOWNERS-granted exception label.
+      - name: Comment findings
+        if: steps.review.outputs.exit != '0'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const body = fs.readFileSync('/tmp/triage.txt', 'utf8');
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '### clean-code review\n\n```\n' + body + '\n```',
+            });

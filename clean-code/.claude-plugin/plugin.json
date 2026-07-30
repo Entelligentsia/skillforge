@@ -1,0 +1,13 @@
+{
+  "name": "clean-code",
+  "version": "0.1.0",
+  "description": "Commit-time clean-code review gate — reviews the staged diff, presents findings for a single apply/manual/approve decision, and stays silent when there is nothing to decide",
+  "license": "MIT",
+  "author": {
+    "name": "Entelligentsia",
+    "email": "hello@entelligentsia.in",
+    "url": "https://github.com/Entelligentsia"
+  },
+  "repository": "https://github.com/Entelligentsia/skillforge",
+  "keywords": ["clean-code", "code-review", "pre-commit", "governance", "code-quality"]
+}
